@@ -4,6 +4,12 @@ export interface Auth {
     user: User;
 }
 
+export interface Company {
+    code: string;
+    name: string;
+    logo: string;
+}
+
 export interface BreadcrumbItem {
     title: string;
     href: string;
@@ -25,6 +31,7 @@ export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    company: Company;
     [key: string]: unknown;
 }
 

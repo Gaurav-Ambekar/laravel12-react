@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\CompanyService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -45,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'company' => fn () => app(CompanyService::class)->getSharedData(),
         ]);
     }
 }
