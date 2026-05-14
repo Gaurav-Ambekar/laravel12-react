@@ -1,3 +1,4 @@
+import AppLogoIcon from '@/components/app-logo-icon';
 import AppearanceToggleDropdown from '@/components/appearance-dropdown';
 import { useCompany } from '@/hooks/use-company';
 import loginDarkSvg from '@images/auth/login-dark.svg';
@@ -26,7 +27,12 @@ export default function AuthSplitLayout({ children, title, description }: AuthLa
                     <div className="relative hidden w-full items-center justify-center bg-[linear-gradient(225deg,rgba(239,18,98,1)_0%,rgba(67,97,238,1)_100%)] p-5 lg:inline-flex lg:max-w-208.75 xl:-ms-32 ltr:xl:skew-x-14 rtl:xl:skew-x-[-14deg]">
                         <div className="from-primary/10 absolute inset-y-0 w-8 via-transparent to-transparent xl:w-16 ltr:-right-10 ltr:bg-linear-to-r ltr:xl:-right-20 rtl:-left-10 rtl:bg-linear-to-l rtl:xl:-left-20"></div>
                         <div className="ltr:xl:-skew-x-14 rtl:xl:skew-x-14">
-                            <h1 className="text-primary text-center text-3xl leading-snug! font-extrabold uppercase md:text-4xl">{company?.name}</h1>
+                            <div className="mb-1 flex items-center justify-center gap-2 rounded-md">
+                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)]" />
+                                <p className="text-primary text-center text-2xl leading-snug! font-extrabold uppercase md:text-3xl">
+                                    {company?.name}
+                                </p>
+                            </div>
                             <div className="mt-24 hidden w-full max-w-107.5 lg:block">
                                 <img src={loginSvg} alt="Light Mode Login Svg" className="h-full w-full object-cover dark:hidden" />
                                 <img src={loginDarkSvg} alt="Dark Mode Login Svg" className="hidden h-full w-full object-cover dark:block" />
@@ -39,7 +45,7 @@ export default function AuthSplitLayout({ children, title, description }: AuthLa
                         </div>
                         <div className="w-full max-w-md px-4 lg:max-w-lg">
                             <div className="mb-5">
-                                <h1 className="text-primary text-3xl leading-snug! font-extrabold uppercase md:text-4xl">{title}</h1>
+                                <h1 className="text-primary text-2xl leading-snug! font-extrabold uppercase md:text-3xl">{title}</h1>
                                 <p className="text-base leading-normal font-bold">{description}</p>
                             </div>
                             {children}
