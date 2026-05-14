@@ -1,3 +1,4 @@
+import AppearanceToggleDropdown from '@/components/appearance-dropdown';
 import { useCompany } from '@/hooks/use-company';
 import loginDarkSvg from '@images/auth/login-dark.svg';
 import loginSvg from '@images/auth/login.svg';
@@ -33,7 +34,9 @@ export default function AuthSplitLayout({ children, title, description }: AuthLa
                         </div>
                     </div>
                     <div className="relative flex w-full flex-col items-center justify-center gap-5">
-                        <div className="m-4 ms-auto w-fit">Theme mode</div>
+                        <div className="m-4 ms-auto w-fit">
+                            <AppearanceToggleDropdown />
+                        </div>
                         <div className="w-full max-w-md px-4 lg:max-w-lg">
                             <div className="mb-5">
                                 <h1 className="text-primary text-3xl leading-snug! font-extrabold uppercase md:text-4xl">{title}</h1>
