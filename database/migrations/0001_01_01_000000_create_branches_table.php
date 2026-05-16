@@ -28,10 +28,10 @@ return new class extends Migration
             $table->timestamps();
 
             // Because MySQL doesn't support partial unique indexes
-            $table->datetime('delete_flag')->nullable()->storedAs(SoftDeleteMarker::sql())->index();
+            $table->datetime('is_deleted')->nullable()->storedAs(SoftDeleteMarker::sql())->index();
 
-            // Unique constraint on name where delete_flag is null
-            $table->unique(['name', 'delete_flag']);
+            // Unique constraint on name where is_deleted is null
+            $table->unique(['name', 'is_deleted']);
         });
 
         // Add a comment to explain the magic date
