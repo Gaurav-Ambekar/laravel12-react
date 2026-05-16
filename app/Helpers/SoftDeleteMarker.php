@@ -7,10 +7,10 @@ namespace App\Helpers;
  * 
  * MySQL doesn't support partial unique indexes (WHERE deleted_at IS NULL).
  * This class provides a single source of truth for the magic date used in
- * the generated 'is_deleted' column.
+ * the generated 'delete_flag' column.
  * 
- * Active records: is_deleted = ACTIVE_MARKER
- * Deleted records: is_deleted = actual deleted_at timestamp
+ * Active records: delete_flag = ACTIVE_MARKER
+ * Deleted records: delete_flag = actual deleted_at timestamp
  */
 
 class SoftDeleteMarker
@@ -86,7 +86,7 @@ class SoftDeleteMarker
     public static function getTableComment(): string
     {
         return sprintf(
-            'is_deleted uses "%s" for active records to work around MySQL partial unique index limitation. ' .
+            'delete_flag uses "%s" for active records to work around MySQL partial unique index limitation. ' .
             'Active records have this value, deleted records have the actual deleted_at timestamp.',
             self::get()
         );

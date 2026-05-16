@@ -7,12 +7,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | MySQL doesn't support partial unique indexes (WHERE deleted_at IS NULL).
-    | This magic date is used in the generated 'is_deleted' column to:
+    | This magic date is used in the generated 'delete_flag' column to:
     | - Mark active records with a constant value
-    | - Allow unique constraints on (name, is_deleted) to work correctly
+    | - Allow unique constraints on (name, delete_flag) to work correctly
     |
-    | Active records: is_deleted = ACTIVE_MARKER
-    | Deleted records: is_deleted = actual deleted_at timestamp
+    | Active records: delete_flag = ACTIVE_MARKER
+    | Deleted records: delete_flag = actual deleted_at timestamp
     |
     */
     'soft_delete_marker' => env('SOFT_DELETE_MARKER', '0000-01-01 00:00:00'),

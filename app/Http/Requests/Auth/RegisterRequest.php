@@ -12,18 +12,6 @@ use Illuminate\Validation\Validator;
 class RegisterRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     * Only allow registration when no active users exist.
-     * (first-run setup) — matches the canRegister flag on login page
-     * 
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return User::where('is_active', true)->whereNull('is_deleted')->count() === 0;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>

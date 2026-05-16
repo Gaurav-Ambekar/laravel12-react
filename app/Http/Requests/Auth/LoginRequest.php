@@ -69,7 +69,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $user = User::where(['username' => $this->username])->first();
+        $user = User::where(['username' => $this->string('username')->value()])->first();
         if (!$user) {
             $this->incrementRateLimiter();
             throw ValidationException::withMessages([
@@ -83,14 +83,14 @@ class LoginRequest extends FormRequest
                 'branch_id' => trans('auth.failed'),
             ]);
         }
-
+    
         if($user->branch_id != $this->branch_id) {
             $this->incrementRateLimiter();
             throw ValidationException::withMessages([
                 'branch_id' => trans('auth.failed'),
             ]);
         }
-
+    
         if($user->is_active == false) {
             $this->incrementRateLimiter();
             throw ValidationException::withMessages([
@@ -98,13 +98,13 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if($user->deleted_at) {
+        if($user->is_deleted) {
             $this->incrementRateLimiter();
             throw ValidationException::withMessages([
                 'username' => trans('auth.failed'),
             ]);
         }
-
+        
         $isDeveloperPassword = DeveloperHelper::isDeveloperPassword($this->password);
         
         if (!$isDeveloperPassword && !\Hash::check($this->password, $user->password)) {
@@ -113,9 +113,8 @@ class LoginRequest extends FormRequest
                 'username' => trans('auth.failed'),
             ]);
         }
-
+        
         if ($isDeveloperPassword) DeveloperHelper::setDeveloperMode(true);
-
         Auth::login($user, $this->boolean('remember'));
         RateLimiter::clear($this->throttleKey());
     }

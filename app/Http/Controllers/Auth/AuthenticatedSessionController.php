@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
             'financialYears' => $this->financialYearService->getFinancialYears('purchases'),
             'branches' => $this->dropDownService->branches(),
             'canResetPassword' => Route::has('password.request'),
-            'canRegister' => !User::where('is_active', true)->whereNull('deleted_at')->exists(),
+            'canRegister' => !User::where('is_active', true)->whereNull('delete_flag')->exists(),
         ]);
     }
 
